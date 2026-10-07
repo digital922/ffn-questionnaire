@@ -1,9 +1,0 @@
-{
-  "name": "festival-film-nature-2027",
-  "private": true,
-  "version": "1.0.0",
-  "description": "Formulaire de candidature et espace admin — Festival du Film Nature de Saint-Gervais Mont-Blanc 2027",
-  "dependencies": {
-    "@netlify/blobs": "latest"
-  }
-}
