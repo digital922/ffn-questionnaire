@@ -124,16 +124,20 @@
   .welcome{padding:0;align-items:stretch;}
   .welcome .step-inner{max-width:none;}
   .welcome.active .step-inner{animation:none;}
-  .hero-wrap{position:relative;min-height:100vh;min-height:100dvh;display:grid;grid-template-columns:1.05fr .95fr;align-items:center;padding-top:var(--topbar-h);}
-  @media (max-width:900px){.hero-wrap{grid-template-columns:1fr;grid-template-rows:auto auto;}}
-  .hero-text{padding:44px 64px 60px;position:relative;z-index:2;}
+  .hero-wrap{position:relative;min-height:100vh;min-height:100dvh;display:grid;grid-template-columns:1.05fr .95fr;align-content:center;align-items:center;padding-top:var(--topbar-h);}
+  .hero-head{grid-column:1/-1;text-align:center;padding:34px 48px 4px;max-width:1100px;margin:0 auto;}
+  .hero-head .hero-eyebrow{justify-content:center;}
+  .hero-head .hero-title{max-width:none;margin-left:auto;margin-right:auto;}
+  @media (max-width:900px){.hero-head{padding:28px 22px 6px;order:0;}}
+  @media (max-width:900px){.hero-wrap{grid-template-columns:1fr;grid-template-rows:auto;}}
+  .hero-text{padding:16px 32px 48px;position:relative;z-index:2;}
   @media (min-width:901px){.hero-text{padding-left:88px;}}
   @media (max-width:900px){.hero-text{padding:30px 24px 8px;order:2;}}
 
   .hero-eyebrow{display:inline-flex;align-items:center;gap:8px;color:var(--gentian-dark);font-size:.86rem;margin-bottom:1.1em;
     opacity:0;animation:fade-up .6s .05s cubic-bezier(.2,.8,.2,1) forwards;}
   .hero-eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--alpenglow);}
-  .hero-title{font-size:clamp(1.8rem,4vw,2.9rem);line-height:1.1;color:var(--ink);margin-bottom:.15em;max-width:18ch;
+  .hero-title{text-wrap:balance;font-size:clamp(1.7rem,3.6vw,2.8rem);line-height:1.12;color:var(--ink);margin-bottom:.2em;
     opacity:0;animation:fade-up .6s .15s cubic-bezier(.2,.8,.2,1) forwards;}
   .hero-title-en{font-size:clamp(1rem,1.6vw,1.25rem);color:var(--ink-soft);font-style:italic;margin-bottom:.9em;
     opacity:0;animation:fade-up .6s .2s cubic-bezier(.2,.8,.2,1) forwards;}
@@ -205,10 +209,12 @@
   <!-- STEP 0 : WELCOME -->
   <section class="step welcome active" data-step="0">
     <div class="hero-wrap">
-      <div class="hero-text">
+      <div class="hero-head">
         <div class="hero-eyebrow"><span class="dot" aria-hidden="true"></span>Appel à films 2027 · Call for entries 2027</div>
-        <h1 class="hero-title display">2ème édition du film nature, appel à candidature</h1>
-        <p class="hero-title-en">2nd edition of the nature film festival — call for entries</p>
+        <h1 class="hero-title display">Édition 2027 du Festival du film nature de <span style="white-space:nowrap">Saint&#8209;Gervais&#8209;Mont&#8209;Blanc</span></h1>
+        <p class="hero-title-en">2027 edition of the Saint-Gervais-Mont-Blanc Nature Film Festival</p>
+      </div>
+      <div class="hero-text">
         <p class="hero-lede">
           <span class="fr">Déposez votre film pour l'édition 2027 du Festival du Film Nature de Saint-Gervais Mont-Blanc, qui se tiendra du 6 au 10 avril 2027.</span>
           Submit your film for the 2027 edition of the Saint-Gervais Mont-Blanc Nature Film Festival, taking place 6–10 April 2027.
@@ -216,15 +222,15 @@
         <div class="hero-stats">
           <div class="stat-pill">
             <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg>
-            <div><strong>Ouverture — 5 oct. 2026</strong><span>Opening — 5 Oct 2026</span></div>
+            <div><strong>Ouverture : 19 octobre</strong><span>Opening: 19 October</span></div>
           </div>
           <div class="stat-pill">
             <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
-            <div><strong>Clôture — 5 janv. 2027, minuit</strong><span>Deadline — 5 Jan 2027, midnight</span></div>
+            <div><strong>Fermeture : 10 janvier, minuit</strong><span>Deadline: 10 January, midnight</span></div>
           </div>
           <div class="stat-pill">
             <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12l4-6 4 4 5-8 5 12"/></svg>
-            <div><strong>Films 2023 et +, toutes durées</strong><span>2023 onward, any length</span></div>
+            <div><strong>Films de 2023 et +</strong><span>2023 onward, any length</span></div>
           </div>
         </div>
         <div class="hero-actions">
