@@ -4,18 +4,19 @@
 // Variables d'environnement (Site settings > Environment variables) :
 //   NETLIFY_SITE_ID   -> Site settings > General > Site ID
 //   NETLIFY_API_TOKEN -> User settings > Applications > Personal access tokens
-//   ADMIN_PIN         -> optionnel, par défaut "1955"
+//   ADMIN_CODE        -> code d'accès à l'espace organisation (ADMIN_PIN accepté aussi ; sinon "1955")
 
 const FORM_NAME = 'candidature-film-2027';
 
 exports.handler = async function (event) {
   const pin = event.headers['x-admin-pin'] || '';
-  if (pin !== (process.env.ADMIN_PIN || '1955')) {
+  const expected = String(process.env.ADMIN_CODE || process.env.ADMIN_PIN || '1955').trim();
+  if (String(pin).trim() !== expected) {
     return { statusCode: 401, body: JSON.stringify({ error: 'Code incorrect' }) };
   }
 
   const token = process.env.NETLIFY_API_TOKEN;
-  const siteId = process.env.NETLIFY_SITE_ID;
+  const siteId = process.env.NETLIFY_SITE_ID || process.env.SITE_ID;
   if (!token || !siteId) {
     return { statusCode: 500, body: JSON.stringify({ error: "Variables NETLIFY_API_TOKEN et NETLIFY_SITE_ID manquantes (Site settings > Environment variables)." }) };
   }
