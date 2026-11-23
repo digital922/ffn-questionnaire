@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Festival du Film Nature — Saint-Gervais Mont-Blanc — Appel à films 2027 / Call for entries 2027</title>
+<meta name="description" content="Déposez votre film pour l'édition 2027 du Festival du Film Nature de Saint-Gervais Mont-Blanc. Submit your film for the 2027 edition.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --spruce-900:#0F211C; --spruce-800:#173029; --spruce-700:#20423A;
+    --mist:#F3F1E7; --paper:#FBFAF5; --ink:#12241F; --ink-soft:#4B5A54;
+    --gentian:#33489E; --gentian-dark:#232F6B; --alpenglow:#DE9A55;
+    --line:#D8D4C4; --error:#B3432B; --radius:6px; --topbar-h:56px;
+  }
+  *,*::before,*::after{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;}
+  body{margin:0;font-family:'Work Sans',sans-serif;background:var(--paper);color:var(--ink);line-height:1.5;padding-bottom:env(safe-area-inset-bottom,0px);}
+  h1,h2,h3,.display{font-family:'Fraunces',serif;font-weight:500;letter-spacing:-0.01em;}
+  a{color:inherit;}
+  .visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;}
+  button{font-family:inherit;}
+  :focus-visible{outline:2px solid var(--gentian);outline-offset:3px;}
+  .en{color:var(--ink-soft);font-weight:400;}
+  .field-label .en, .step-help .en{font-style:italic;}
+
+  #app{position:relative;min-height:100vh;min-height:100dvh;overflow:hidden;background:var(--paper);}
+
+  /* ---------- top bar : always present ---------- */
+  .topbar{
+    position:fixed;top:0;left:0;right:0;z-index:40;background:rgba(251,250,245,.94);backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:14px;
+    padding:12px 22px;padding-top:calc(12px + env(safe-area-inset-top,0px));font-size:.82rem;color:var(--ink-soft);
+  }
+  .topbar-brand{font-family:'Fraunces',serif;font-weight:600;color:var(--ink);font-size:.92rem;white-space:nowrap;}
+  .topbar-right{display:flex;align-items:center;gap:16px;flex-wrap:wrap;justify-content:flex-end;}
+  .topbar-link{color:var(--ink-soft);text-decoration:none;border-bottom:1px solid var(--line);font-size:.78rem;white-space:nowrap;display:inline-flex;align-items:center;gap:5px;}
+  .topbar-link:hover{color:var(--gentian-dark);border-color:var(--gentian);}
+  .topbar-count{white-space:nowrap;font-variant-numeric:tabular-nums;font-size:.78rem;}
+  .topbar-track{position:absolute;bottom:-1px;left:0;height:2px;width:100%;background:var(--line);}
+  .topbar-fill{height:100%;width:0%;background:var(--gentian);transition:width .5s cubic-bezier(.65,0,.35,1);}
+  @media (max-width:640px){.topbar{padding:9px 14px;padding-top:calc(9px + env(safe-area-inset-top,0px));}.topbar-brand{font-size:.8rem;}.topbar-link{font-size:.72rem;}}
+
+  /* ---------- steps ---------- */
+  form{margin:0;}
+  .step{display:none;min-height:100vh;min-height:100dvh;padding:calc(var(--topbar-h) + 56px) 88px 90px;align-items:center;}
+  .step.active{display:flex;}
+  .step.active .step-inner{animation:slide-in .48s cubic-bezier(.2,.8,.2,1);}
+  @media (max-width:760px){.step{padding:calc(var(--topbar-h) + 30px) 22px 140px;}}
+  @keyframes slide-in{from{opacity:0;transform:translateX(22px);}to{opacity:1;transform:translateX(0);}}
+  @media (prefers-reduced-motion:reduce){.step.active .step-inner{animation:none;}}
+
+  .step-inner{max-width:660px;margin:0 auto;width:100%;}
+  .step-kicker{font-size:.85rem;color:var(--gentian-dark);margin-bottom:10px;}
+  .step-title{font-size:clamp(1.4rem,3vw,2.15rem);line-height:1.22;margin-bottom:.15em;}
+  .step-title .en{display:block;font-size:.58em;color:var(--ink-soft);font-style:italic;margin-top:.1em;}
+  .step-help{color:var(--ink-soft);font-size:.96rem;margin-bottom:1.5em;max-width:56ch;}
+  .step-help .fr{color:var(--ink);}
+  .step-help .sep{opacity:.4;margin:0 .3em;}
+
+  label.field-label{display:block;font-size:.92rem;color:var(--ink-soft);margin:1.3em 0 .4em;}
+  label.field-label:first-of-type{margin-top:0;}
+  .field-note{font-size:.8rem;color:var(--ink-soft);margin-top:.35em;}
+
+  input[type=text],input[type=email],input[type=tel],input[type=number],input[type=url],input[type=password],select,textarea{
+    width:100%;font:inherit;font-size:1.1rem;padding:.6em .1em;border:none;border-bottom:2px solid var(--line);
+    background:transparent;color:var(--ink);border-radius:0;transition:border-color .18s;
+  }
+  textarea{font-size:1.02rem;resize:vertical;min-height:5.5em;line-height:1.55;}
+  input:focus,select:focus,textarea:focus{outline:none;border-bottom-color:var(--gentian);}
+  input::placeholder,textarea::placeholder{color:#B7B2A0;}
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:0 26px;}
+  @media (max-width:560px){.two-col{grid-template-columns:1fr;}}
+  .char-count{font-size:.78rem;color:var(--ink-soft);text-align:right;margin-top:.3em;}
+
+  .check-inline{display:flex;gap:22px;flex-wrap:wrap;margin-top:.3em;}
+  .check-inline label{display:flex;align-items:center;gap:8px;font-size:.94rem;cursor:pointer;}
+  .check-inline input{width:17px;height:17px;accent-color:var(--gentian);}
+
+  .consent-row{display:flex;gap:12px;align-items:flex-start;margin:1.1em 0;padding:.9em 1em;border:1.5px solid var(--line);border-radius:var(--radius);transition:border-color .18s;}
+  .consent-row:has(input:checked){border-color:var(--gentian);}
+  .consent-row input{margin-top:.25em;width:18px;height:18px;flex:none;accent-color:var(--gentian);}
+  .consent-row label{font-size:.93rem;color:var(--ink);cursor:pointer;}
+  .consent-row label .en{display:block;font-size:.88em;color:var(--ink-soft);font-style:italic;margin-top:.25em;}
+  .consent-row a{color:var(--gentian-dark);text-decoration:underline;}
+
+  .director-block{border:1.5px solid var(--line);border-radius:var(--radius);padding:1.1em 1.2em 1.3em;margin-bottom:1.1em;position:relative;}
+  .director-block h3{font-size:.82rem;font-family:'Work Sans',sans-serif;font-weight:600;color:var(--gentian-dark);text-transform:none;margin-bottom:.6em;display:flex;justify-content:space-between;align-items:center;}
+  .director-remove{background:none;border:none;color:var(--ink-soft);font-size:.78rem;cursor:pointer;text-decoration:underline;padding:0;}
+  .director-remove:hover{color:var(--error);}
+  .director-extra{display:none;}
+  .director-extra.show{display:block;}
+  .add-director-btn{background:none;border:1.5px dashed var(--line);color:var(--gentian-dark);border-radius:var(--radius);
+    padding:.7em 1em;font-size:.92rem;cursor:pointer;width:100%;text-align:left;margin-bottom:1.1em;}
+  .add-director-btn:hover{border-color:var(--gentian);}
+  .add-director-btn.hide{display:none;}
+
+  .info-list{margin:0 0 1.6em;padding:0;list-style:none;}
+  .info-list li{display:flex;gap:12px;padding:.55em 0;border-bottom:1px solid var(--line);font-size:.95rem;}
+  .info-list li::before{content:'—';color:var(--gentian);flex:none;}
+  .info-list .en{display:block;color:var(--ink-soft);font-style:italic;font-size:.9em;margin-top:.15em;}
+
+  .date-chips{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:1.6em;}
+  .date-chip{border:1px solid var(--line);border-radius:10px;padding:.7em .95em;background:var(--paper);}
+  .date-chip strong{display:block;font-family:'Fraunces',serif;font-weight:500;font-size:.98rem;color:var(--ink);}
+  .date-chip span{display:block;font-size:.76rem;color:var(--ink-soft);}
+
+  .error-msg{color:var(--error);font-size:.86rem;margin-top:.5em;min-height:1.2em;}
+
+  .step-nav{display:flex;align-items:center;gap:18px;margin-top:2em;}
+  .btn{font-size:1rem;font-weight:600;padding:.75em 1.5em;border-radius:var(--radius);border:none;cursor:pointer;transition:background .15s,transform .1s;}
+  .btn:active{transform:translateY(1px);}
+  .btn-primary{background:var(--gentian);color:#fff;}
+  .btn-primary:hover{background:var(--gentian-dark);}
+  .btn-primary:disabled{opacity:.5;cursor:default;}
+  .btn-ghost{background:none;color:var(--ink-soft);padding:.75em .4em;}
+  .btn-ghost:hover{color:var(--ink);}
+  .hint-key{font-size:.78rem;color:var(--ink-soft);}
+  kbd{border:1px solid var(--line);border-radius:4px;padding:.05em .4em;font-family:inherit;font-size:.85em;}
+
+  /* ---------- hero ---------- */
+  .welcome{padding:0;align-items:stretch;}
+  .welcome .step-inner{max-width:none;}
+  .welcome.active .step-inner{animation:none;}
+  .hero-wrap{position:relative;min-height:100vh;min-height:100dvh;display:grid;grid-template-columns:1.05fr .95fr;align-content:center;align-items:center;padding-top:var(--topbar-h);}
+  .hero-head{grid-column:1/-1;text-align:center;padding:34px 48px 4px;max-width:1100px;margin:0 auto;}
+  .hero-head .hero-eyebrow{justify-content:center;}
+  .hero-head .hero-title{max-width:none;margin-left:auto;margin-right:auto;}
+  @media (max-width:900px){.hero-head{padding:28px 22px 6px;order:0;}}
+  @media (max-width:900px){.hero-wrap{grid-template-columns:1fr;grid-template-rows:auto;}}
+  .hero-text{padding:16px 32px 48px;position:relative;z-index:2;}
+  @media (min-width:901px){.hero-text{padding-left:88px;}}
+  @media (max-width:900px){.hero-text{padding:30px 24px 8px;order:2;}}
+
+  .hero-eyebrow{display:inline-flex;align-items:center;gap:8px;color:var(--gentian-dark);font-size:.86rem;margin-bottom:1.1em;
+    opacity:0;animation:fade-up .6s .05s cubic-bezier(.2,.8,.2,1) forwards;}
+  .hero-eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--alpenglow);}
+  .hero-title{text-wrap:balance;font-size:clamp(1.7rem,3.6vw,2.8rem);line-height:1.12;color:var(--ink);margin-bottom:.2em;
+    opacity:0;animation:fade-up .6s .15s cubic-bezier(.2,.8,.2,1) forwards;}
+  .hero-title-en{font-size:clamp(1rem,1.6vw,1.25rem);color:var(--ink-soft);font-style:italic;margin-bottom:.9em;
+    opacity:0;animation:fade-up .6s .2s cubic-bezier(.2,.8,.2,1) forwards;}
+  .hero-lede{font-size:1.02rem;color:var(--ink-soft);max-width:48ch;margin-bottom:1.7em;
+    opacity:0;animation:fade-up .6s .28s cubic-bezier(.2,.8,.2,1) forwards;}
+  .hero-lede .fr{color:var(--ink);display:block;margin-bottom:.4em;}
+  .hero-stats{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:2em;
+    opacity:0;animation:fade-up .6s .36s cubic-bezier(.2,.8,.2,1) forwards;}
+  .stat-pill{display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:10px;padding:.65em .9em;background:var(--paper);}
+  .stat-pill svg{flex:none;color:var(--gentian);}
+  .stat-pill strong{display:block;font-family:'Fraunces',serif;font-weight:500;font-size:.94rem;color:var(--ink);line-height:1.2;}
+  .stat-pill span{display:block;font-size:.73rem;color:var(--ink-soft);}
+  .hero-actions{display:flex;align-items:center;gap:20px;flex-wrap:wrap;
+    opacity:0;animation:fade-up .6s .44s cubic-bezier(.2,.8,.2,1) forwards;}
+  .hero-cta{background:var(--spruce-900);color:var(--paper);border:none;padding:.9em 1.8em;border-radius:var(--radius);
+    font-size:1.02rem;font-weight:600;cursor:pointer;transition:background .18s,transform .12s;}
+  .hero-cta:hover{background:#081712;transform:translateY(-1px);}
+  .hero-secondary{font-size:.88rem;color:var(--ink-soft);text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:2px;}
+  .hero-secondary:hover{color:var(--gentian-dark);border-color:var(--gentian);}
+  @keyframes fade-up{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+  @media (prefers-reduced-motion:reduce){.hero-eyebrow,.hero-title,.hero-title-en,.hero-lede,.hero-stats,.hero-actions{animation:none;opacity:1;}}
+
+  .hero-visual{display:flex;align-items:center;justify-content:center;padding:44px 56px 44px 8px;background:var(--paper);}
+  .hero-visual img{width:100%;height:auto;display:block;border-radius:10px;border:1px solid var(--line);}
+  @media (max-width:900px){.hero-visual{order:1;padding:20px 24px 0;}}
+  .cloud{opacity:.55;animation:drift 34s linear infinite;}
+  .cloud.c2{animation-duration:48s;animation-delay:-10s;opacity:.4;}
+  @keyframes drift{from{transform:translateX(-8%);}to{transform:translateX(8%);}}
+  @media (prefers-reduced-motion:reduce){.cloud{animation:none;}}
+
+  /* ---------- summary ---------- */
+  .summary-list{border-top:1px solid var(--line);margin-top:.6em;}
+  .summary-row{display:flex;justify-content:space-between;gap:16px;padding:.7em 0;border-bottom:1px solid var(--line);font-size:.92rem;}
+  .summary-row dt{color:var(--ink-soft);flex:none;width:38%;}
+  .summary-row dd{margin:0;text-align:right;overflow-wrap:anywhere;}
+
+  .done-icon{width:52px;height:52px;border-radius:50%;background:var(--gentian);display:flex;align-items:center;justify-content:center;margin-bottom:1em;animation:pop .4s cubic-bezier(.2,.9,.3,1.4);}
+  @keyframes pop{from{transform:scale(.6);opacity:0;}to{transform:scale(1);opacity:1;}}
+  @media (prefers-reduced-motion:reduce){.done-icon{animation:none;}}
+
+  .submit-error{display:none;background:#FBEAE4;border:1px solid var(--error);color:var(--error);padding:.9em 1.1em;border-radius:var(--radius);font-size:.9rem;margin-top:1em;}
+</style>
+</head>
+<body>
+
+<div id="localPreviewBanner" style="display:none;position:fixed;top:0;left:0;right:0;z-index:60;background:#3B2F14;color:#F8ECD4;font-size:.85rem;text-align:center;padding:.6em 1em;">
+  Vous prévisualisez ce fichier en local : l'envoi de candidature et l'espace admin ne fonctionneront qu'une fois le site déployé sur Netlify. Voir README.md.
+</div>
+
+<div class="topbar" id="topbar">
+  <div class="topbar-brand">Festival du Film Nature</div>
+  <div class="topbar-right">
+    <a class="topbar-link" href="reglement/reglement-fr.pdf" target="_blank" rel="noopener">Règlement FR</a>
+    <a class="topbar-link" href="reglement/reglement-en.pdf" target="_blank" rel="noopener">Regulations EN</a>
+    <a class="topbar-link" href="admin.html">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+      Espace organisation
+    </a>
+    <span class="topbar-count" id="railCount"></span>
+  </div>
+  <div class="topbar-track"><div class="topbar-fill" id="railFill"></div></div>
+</div>
+
+<div id="app">
+<form name="candidature-film-2027" id="filmForm" method="POST" action="merci.html" data-netlify="true" data-netlify-honeypot="bot-field">
+  <input type="hidden" name="form-name" value="candidature-film-2027">
+  <p class="visually-hidden"><label>Ne pas remplir : <input name="bot-field"></label></p>
+
+  <!-- STEP 0 : WELCOME -->
+  <section class="step welcome active" data-step="0">
+    <div class="hero-wrap">
+      <div class="hero-head">
+        <div class="hero-eyebrow"><span class="dot" aria-hidden="true"></span>Appel à films 2027 · Call for entries 2027</div>
+        <h1 class="hero-title display">Édition 2027 du Festival du film nature de <span style="white-space:nowrap">Saint&#8209;Gervais&#8209;Mont&#8209;Blanc</span></h1>
+        <p class="hero-title-en">2027 edition of the Saint-Gervais-Mont-Blanc Nature Film Festival</p>
+      </div>
+      <div class="hero-text">
+        <p class="hero-lede">
+          <span class="fr">Déposez votre film pour l'édition 2027 du Festival du Film Nature de Saint-Gervais Mont-Blanc, qui se tiendra du 6 au 10 avril 2027.</span>
+          Submit your film for the 2027 edition of the Saint-Gervais Mont-Blanc Nature Film Festival, taking place 6–10 April 2027.
+        </p>
+        <div class="hero-stats">
+          <div class="stat-pill">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg>
+            <div><strong>Ouverture : 19 octobre</strong><span>Opening: 19 October</span></div>
+          </div>
+          <div class="stat-pill">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+            <div><strong>Fermeture : 10 janvier, minuit</strong><span>Deadline: 10 January, midnight</span></div>
+          </div>
+          <div class="stat-pill">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12l4-6 4 4 5-8 5 12"/></svg>
+            <div><strong>Films de 2023 et +</strong><span>2023 onward, any length</span></div>
+          </div>
+        </div>
+        <div class="hero-actions">
+          <button type="button" class="hero-cta" id="startBtn">Déposer mon film · Submit my film</button>
+          <a class="hero-secondary" href="reglement/reglement-fr.pdf" target="_blank" rel="noopener">Lire le règlement complet / Read full regulations</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <img src="https://www.saintgervais.com/app/uploads/saint-gervais/2026/02/Affiche-16x9-1.png" alt="Affiche du Festival du film nature de Saint-Gervais Mont-Blanc — 2e édition" referrerpolicy="no-referrer">
+      </div>
+    </div>
+  </section>
+
+  <!-- STEP 1 : ELIGIBILITE -->
+  <section class="step" data-step="1">
+    <div class="step-inner">
+      <div class="step-kicker">Avant de commencer · Before you start</div>
+      <h2 class="step-title">Conditions d'éligibilité<span class="en">Eligibility conditions</span></h2>
+      <p class="step-help">La compétition 2027 est ouverte aux films internationaux : <span class="sep">/</span> The 2027 competition is open to international films:</p>
+      <ul class="info-list">
+        <li><div>sans limitation de durée ou de genre<span class="en">with no restrictions on length or genre</span></div></li>
+        <li><div>produits en 2023 ou ultérieurement<span class="en">produced in or after 2023</span></div></li>
+        <li><div>ayant comme thèmes principaux la nature et le vivant<span class="en">whose main themes are nature and the living</span></div></li>
+        <li><div>avec une liberté artistique totale, dans le respect des animaux et de leur environnement<span class="en">with complete artistic freedom, whilst respecting animals and their environment</span></div></li>
+      </ul>
+      <p class="step-help" style="margin-bottom:0;">Le règlement complet est disponible en français et en anglais. <span class="sep">/</span> The full regulations are available in French and English —
+        <a class="topbar-link" style="border:none;color:var(--gentian-dark);text-decoration:underline;" href="reglement/reglement-fr.pdf" target="_blank" rel="noopener">FR</a> ·
+        <a class="topbar-link" style="border:none;color:var(--gentian-dark);text-decoration:underline;" href="reglement/reglement-en.pdf" target="_blank" rel="noopener">EN</a>
+      </p>
+      <div class="step-nav"></div>
+    </div>
+  </section>
+
+  <!-- STEP 2 : FILM -->
+  <section class="step" data-step="2">
+    <div class="step-inner">
+      <div class="step-kicker">1 · Le film / The film</div>
+      <h2 class="step-title">Parlez-nous de votre film<span class="en">Tell us about your film</span></h2>
+
+      <label class="field-label" for="titre_film">Nom du film <span class="en">/ Film title</span></label>
+      <input type="text" id="titre_film" name="titre_film" required>
+
+      <div class="two-col">
+        <div>
+          <label class="field-label" for="duree_minutes">Durée (minutes) <span class="en">/ Running time</span></label>
+          <input type="number" id="duree_minutes" name="duree_minutes" min="1" max="400" required>
+        </div>
+        <div>
+          <label class="field-label" for="langue_originale">Langue <span class="en">/ Original language</span></label>
+          <input type="text" id="langue_originale" name="langue_originale" required>
+        </div>
+      </div>
+
+      <label class="field-label">Sous-titres disponibles <span class="en">/ Available subtitles</span></label>
+      <div class="check-inline">
+        <label><input type="checkbox" name="sous_titres_fr" value="oui"> Français / French</label>
+        <label><input type="checkbox" name="sous_titres_en" value="oui"> Anglais / English</label>
+      </div>
+      <p class="field-note">Pour les films non francophones, le Festival demande impérativement des sous-titres français en cas de sélection. <span class="sep">/</span> For non-French-language films, the Festival strictly requires French subtitles in case of official selection.</p>
+
+      <label class="field-label" for="synopsis_court">Synopsis court (500 caractères max) <span class="en">/ Short synopsis (500 characters max)</span></label>
+      <textarea id="synopsis_court" name="synopsis_court" maxlength="500" rows="4" required></textarea>
+      <div class="char-count"><span id="courtCount">0</span>/500</div>
+
+      <div class="error-msg"></div>
+      <div class="step-nav"></div>
+    </div>
+  </section>
+
+  <!-- STEP 3 : REALISATION -->
+  <section class="step" data-step="3">
+    <div class="step-inner">
+      <div class="step-kicker">2 · Réalisation / Director</div>
+      <h2 class="step-title">Qui a réalisé ce film ?<span class="en">Who directed this film?</span></h2>
+
+      <div class="director-block" id="director1">
+        <h3>Réalisateur·ice 1 / Director 1</h3>
+        <div class="two-col">
+          <div><label class="field-label" for="real1_prenom">Prénom <span class="en">/ First name</span></label><input type="text" id="real1_prenom" name="real1_prenom" required></div>
+          <div><label class="field-label" for="real1_nom">Nom <span class="en">/ Last name</span></label><input type="text" id="real1_nom" name="real1_nom" required></div>
+        </div>
+        <label class="field-label" for="real1_pays">Pays <span class="en">/ Country</span></label>
+        <input type="text" id="real1_pays" name="real1_pays" required>
+        <div class="two-col">
+          <div><label class="field-label" for="real1_email">E-mail <span class="en">/ Email</span></label><input type="email" id="real1_email" name="real1_email" required></div>
+          <div><label class="field-label" for="real1_telephone">Téléphone <span class="en">/ Phone</span> (optionnel)</label><input type="tel" id="real1_telephone" name="real1_telephone"></div>
+        </div>
+      </div>
+
+      <div class="director-block director-extra" id="director2">
+        <h3>Réalisateur·ice 2 / Director 2 <button type="button" class="director-remove" data-remove="2">Retirer / Remove</button></h3>
+        <div class="two-col">
+          <div><label class="field-label" for="real2_prenom">Prénom <span class="en">/ First name</span></label><input type="text" id="real2_prenom" name="real2_prenom"></div>
+          <div><label class="field-label" for="real2_nom">Nom <span class="en">/ Last name</span></label><input type="text" id="real2_nom" name="real2_nom"></div>
+        </div>
+        <label class="field-label" for="real2_pays">Pays <span class="en">/ Country</span></label>
+        <input type="text" id="real2_pays" name="real2_pays">
+        <div class="two-col">
+          <div><label class="field-label" for="real2_email">E-mail <span class="en">/ Email</span></label><input type="email" id="real2_email" name="real2_email"></div>
+          <div><label class="field-label" for="real2_telephone">Téléphone <span class="en">/ Phone</span> (optionnel)</label><input type="tel" id="real2_telephone" name="real2_telephone"></div>
+        </div>
+      </div>
+
+      <div class="director-block director-extra" id="director3">
+        <h3>Réalisateur·ice 3 / Director 3 <button type="button" class="director-remove" data-remove="3">Retirer / Remove</button></h3>
+        <div class="two-col">
+          <div><label class="field-label" for="real3_prenom">Prénom <span class="en">/ First name</span></label><input type="text" id="real3_prenom" name="real3_prenom"></div>
+          <div><label class="field-label" for="real3_nom">Nom <span class="en">/ Last name</span></label><input type="text" id="real3_nom" name="real3_nom"></div>
+        </div>
+        <label class="field-label" for="real3_pays">Pays <span class="en">/ Country</span></label>
+        <input type="text" id="real3_pays" name="real3_pays">
+        <div class="two-col">
+          <div><label class="field-label" for="real3_email">E-mail <span class="en">/ Email</span></label><input type="email" id="real3_email" name="real3_email"></div>
+          <div><label class="field-label" for="real3_telephone">Téléphone <span class="en">/ Phone</span> (optionnel)</label><input type="tel" id="real3_telephone" name="real3_telephone"></div>
+        </div>
+      </div>
+
+      <button type="button" class="add-director-btn" id="addDirectorBtn">+ Ajouter un·e autre réalisateur·ice / Add another director</button>
+
+      <div class="error-msg"></div>
+      <div class="step-nav"></div>
+    </div>
+  </section>
+
+  <!-- STEP 4 : PRODUCTION -->
+  <section class="step" data-step="4">
+    <div class="step-inner">
+      <div class="step-kicker">3 · Production</div>
+      <h2 class="step-title">Et côté production ?<span class="en">And on the production side?</span></h2>
+
+      <div class="two-col">
+        <div>
+          <label class="field-label" for="annee_production">Année de production <span class="en">/ Year of production</span></label>
+          <input type="number" id="annee_production" name="annee_production" min="2023" max="2027" required placeholder="2026">
+        </div>
+        <div>
+          <label class="field-label" for="pays_production">Pays de production <span class="en">/ Production country</span></label>
+          <input type="text" id="pays_production" name="pays_production" required>
+        </div>
+      </div>
+      <p class="field-note">Le festival accepte les films produits à partir de 2023 inclus. <span class="sep">/</span> The festival accepts films produced in or after 2023.</p>
+
+      <label class="field-label" for="societe_production">Société de production <span class="en">/ Production company</span> (optionnel)</label>
+      <input type="text" id="societe_production" name="societe_production">
+
+      <label class="field-label">Est-ce une autoproduction ? <span class="en">/ Self-produced film?</span> (optionnel)</label>
+      <div class="check-inline">
+        <label><input type="checkbox" name="autoproduction" value="oui"> Oui / Yes</label>
+      </div>
+
+      <div class="error-msg"></div>
+      <div class="step-nav"></div>
+    </div>
+  </section>
+
+  <!-- STEP 5 : CONTACT -->
+  <section class="step" data-step="5">
+    <div class="step-inner">
+      <div class="step-kicker">4 · Contact</div>
+      <h2 class="step-title">Qui suivra cette candidature ?<span class="en">Who should we contact?</span></h2>
+
+      <div class="two-col">
+        <div><label class="field-label" for="contact_prenom">Prénom <span class="en">/ Surname</span></label><input type="text" id="contact_prenom" name="contact_prenom" required></div>
+        <div><label class="field-label" for="contact_nom">Nom <span class="en">/ Name</span></label><input type="text" id="contact_nom" name="contact_nom" required></div>
+      </div>
+      <div class="two-col">
+        <div><label class="field-label" for="contact_email">E-mail <span class="en">/ Email</span></label><input type="email" id="contact_email" name="contact_email" required></div>
+        <div><label class="field-label" for="contact_telephone">Téléphone <span class="en">/ Phone</span> (optionnel)</label><input type="tel" id="contact_telephone" name="contact_telephone"></div>
+      </div>
+      <div class="two-col">
+        <div><label class="field-label" for="contact_fonction">Fonction <span class="en">/ Position</span> (optionnel)</label><input type="text" id="contact_fonction" name="contact_fonction"></div>
+        <div><label class="field-label" for="contact_pays">Pays <span class="en">/ Country</span></label><input type="text" id="contact_pays" name="contact_pays" required></div>
+      </div>
+
+      <div class="consent-row">
+        <input type="checkbox" id="droits_certifies" name="droits_certifies" value="oui" required>
+        <label for="droits_certifies">Je certifie disposer des droits nécessaires pour inscrire ce film au festival.<span class="en">I certify that I have the necessary rights to submit this film to the festival.</span></label>
+      </div>
+      <div class="consent-row">
+        <input type="checkbox" id="reglement_accepte" name="reglement_accepte" value="oui" required>
+        <label for="reglement_accepte">
+          J'accepte le <a href="reglement/reglement-fr.pdf" target="_blank" rel="noopener">règlement</a> du Festival du film nature de Saint-Gervais-Mont-Blanc.
+          <span class="en">I accept the <a href="reglement/reglement-en.pdf" target="_blank" rel="noopener">regulations</a> of the Saint-Gervais Mont-Blanc Nature Film Festival.</span>
+        </label>
+      </div>
+
+      <div class="error-msg"></div>
+      <div class="step-nav"></div>
+    </div>
+  </section>
+
+  <!-- STEP 6 : LIEN DE VISIONNAGE -->
+  <section class="step" data-step="6">
+    <div class="step-inner">
+      <div class="step-kicker">5 · Lien de visionnage / Viewing link</div>
+      <h2 class="step-title">Comment peut-on voir votre film ?<span class="en">How can we watch your film?</span></h2>
+      <p class="step-help">Un lien Vimeo, YouTube (non répertorié) ou équivalent, permettant au comité de sélection de visionner le film dans son intégralité. <span class="sep">/</span> A Vimeo, unlisted YouTube or equivalent link allowing the selection committee to watch the full film.</p>
+
+      <label class="field-label" for="lien_visionnage">Lien de visionnage <span class="en">/ Viewing link</span></label>
+      <input type="url" id="lien_visionnage" name="lien_visionnage" required placeholder="https://vimeo.com/...">
+
+      <label class="field-label" for="mot_de_passe_visionnage">Mot de passe <span class="en">/ Password</span> (optionnel)</label>
+      <input type="text" id="mot_de_passe_visionnage" name="mot_de_passe_visionnage">
+
+      <div class="error-msg"></div>
+      <div class="step-nav"></div>
+    </div>
+  </section>
+
+  <!-- STEP 7 : DONNEES / RGPD -->
+  <section class="step" data-step="7">
+    <div class="step-inner">
+      <div class="step-kicker">Avant d'envoyer / Before sending</div>
+      <h2 class="step-title">Vos données personnelles<span class="en">Your personal data</span></h2>
+      <p class="step-help">Les données collectées servent uniquement à la gestion des candidatures et à l'organisation du festival. Elles ne sont ni cédées ni vendues à des tiers. <span class="sep">/</span> The data collected is used solely to manage applications and organise the festival. It is never sold or passed on to third parties.</p>
+
+      <div class="consent-row">
+        <input type="checkbox" id="consentement_rgpd" name="consentement_rgpd" value="oui" required>
+        <label for="consentement_rgpd">J'accepte que mes données soient enregistrées dans le cadre de l'organisation du festival. Elles ne font l'objet d'aucune cession ou commercialisation auprès de tiers.
+          <span class="en">I consent to my personal data being recorded for the purposes of organising the festival. It will not be passed on to or sold to any third parties.</span>
+        </label>
+      </div>
+
+      <div class="error-msg"></div>
+      <div class="step-nav"></div>
+    </div>
+  </section>
+
+  <!-- STEP 8 : RECAPITULATIF -->
+  <section class="step" data-step="8">
+    <div class="step-inner">
+      <div class="step-kicker">Dernière vérification / Final check</div>
+      <h2 class="step-title">Tout est prêt ?<span class="en">All set?</span></h2>
+      <p class="step-help">Vérifiez votre candidature avant l'envoi. <span class="sep">/</span> Please review your application before sending.</p>
+      <dl class="summary-list" id="summaryList"></dl>
+      <div class="submit-error" id="submitError">L'envoi a échoué. Vérifiez votre connexion et réessayez. / Sending failed, please check your connection and try again.</div>
+      <div class="step-nav"></div>
+    </div>
+  </section>
+
+  <!-- STEP 9 : CONFIRMATION -->
+  <section class="step" data-step="9">
+    <div class="step-inner">
+      <div class="done-icon" aria-hidden="true">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 12.5l5 5L20 7" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <h2 class="step-title">Candidature envoyée<span class="en">Application submitted</span></h2>
+      <p class="step-help">Merci ! Votre candidature a bien été soumise pour l'édition 2027 du Festival du Film Nature de Saint-Gervais Mont-Blanc. Aucun email de confirmation ne sera envoyé.
+        <span class="sep">/</span> Thank you! Your application has been successfully submitted for the 2027 edition of the Saint-Gervais Mont-Blanc Nature Film Festival. No confirmation email will be sent.</p>
+    </div>
+  </section>
+
+</form>
+</div>
+
+<script>
+(function(){
+  if (location.protocol === 'file:') {
+    var banner = document.getElementById('localPreviewBanner');
+    banner.style.display = 'block';
+    document.body.style.paddingTop = '34px';
+  }
+
+  var form = document.getElementById('filmForm');
+  var steps = Array.prototype.slice.call(form.querySelectorAll('.step'));
+  var total = steps.length - 1;
+  var current = 0;
+  var topbar = document.getElementById('topbar');
+
+  function fieldsIn(step){
+    return Array.prototype.slice.call(step.querySelectorAll('input, textarea, select')).filter(function(el){
+      return el.name !== 'bot-field' && el.offsetParent !== null;
+    });
+  }
+
+  function validateStep(step){
+    var msg = step.querySelector('.error-msg');
+    var fields = fieldsIn(step);
+    for (var i=0;i<fields.length;i++){
+      var el = fields[i];
+      if (el.hasAttribute('required')){
+        if (el.type === 'checkbox' && !el.checked){ if(msg) msg.textContent = 'Merci de cocher cette case pour continuer. / Please check this box to continue.'; return false; }
+        if (el.type !== 'checkbox' && !el.value.trim()){ if(msg) msg.textContent = 'Merci de répondre avant de continuer. / Please answer before continuing.'; return false; }
+        if (el.type === 'email' && el.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value)){ if(msg) msg.textContent = 'Cette adresse email ne semble pas valide. / This email address looks invalid.'; return false; }
+        if (el.type === 'url' && el.value && !/^https?:\/\//i.test(el.value)){ if(msg) msg.textContent = 'Merci de coller un lien complet (https://...). / Please paste a full link (https://...).'; return false; }
+      }
+    }
+    if (msg) msg.textContent = '';
+    return true;
+  }
+
+  function updateRail(){
+    var stepNum = steps[current].dataset.step;
+    var inFlow = stepNum !== '0' && stepNum !== String(steps.length - 1);
+    var pct = Math.min(100, Math.round((current/total)*100));
+    document.getElementById('railFill').style.width = inFlow ? pct + '%' : (stepNum === '0' ? '0%' : '100%');
+    document.getElementById('railCount').textContent = inFlow ? ('Étape ' + current + '/' + total) : '';
+    postResize();
+  }
+
+  function val(name){
+    var el = form.querySelector('[name="'+name+'"]');
+    if (!el) return '';
+    if (el.type === 'checkbox') return el.checked ? 'Oui' : '';
+    return el.value || '';
+  }
+
+  function buildSummary(){
+    var list = document.getElementById('summaryList');
+    list.innerHTML = '';
+    var directors = [val('real1_prenom') + ' ' + val('real1_nom')];
+    if (document.getElementById('director2').classList.contains('show')) directors.push(val('real2_prenom') + ' ' + val('real2_nom'));
+    if (document.getElementById('director3').classList.contains('show')) directors.push(val('real3_prenom') + ' ' + val('real3_nom'));
+    var rows = [
+      ['Titre du film / Film title', val('titre_film')],
+      ['Réalisation / Director(s)', directors.join(', ')],
+      ['Durée / Running time', val('duree_minutes') ? val('duree_minutes') + ' min' : ''],
+      ['Année / Year', val('annee_production')],
+      ['Pays de production / Country', val('pays_production')],
+      ['Contact', (val('contact_prenom') + ' ' + val('contact_nom') + ' — ' + val('contact_email'))],
+      ['Lien de visionnage / Viewing link', val('lien_visionnage')]
+    ];
+    rows.forEach(function(row){
+      var dt = document.createElement('dt'); dt.textContent = row[0];
+      var dd = document.createElement('dd'); dd.textContent = row[1] || '—';
+      var wrap = document.createElement('div'); wrap.className='summary-row';
+      wrap.appendChild(dt); wrap.appendChild(dd);
+      list.appendChild(wrap);
+    });
+  }
+
+  function goTo(index){
+    steps[current].classList.remove('active');
+    current = index;
+    steps[current].classList.add('active');
+    if (steps[current].dataset.step === String(steps.length - 2)) buildSummary();
+    updateRail();
+    window.scrollTo({top:0, behavior:'auto'});
+    var firstField = fieldsIn(steps[current])[0];
+    if (firstField && steps[current].dataset.step !== '0') { try{ firstField.focus({preventScroll:true}); }catch(e){} }
+  }
+
+  function next(){
+    if (!validateStep(steps[current])) return;
+    if (current < steps.length - 1) goTo(current + 1);
+  }
+  function prev(){
+    if (current > 0) goTo(current - 1);
+  }
+
+  var RECAP_STEP = String(steps.length - 2);
+  steps.forEach(function(step){
+    var s = step.dataset.step;
+    var nav = step.querySelector('.step-nav');
+    if (!nav) return;
+    var isLast = (s === RECAP_STEP);
+    var backBtn = document.createElement('button');
+    backBtn.type='button'; backBtn.className='btn btn-ghost'; backBtn.textContent='Retour / Back';
+    backBtn.addEventListener('click', prev);
+    var nextBtn = document.createElement('button');
+    nextBtn.type = isLast ? 'submit' : 'button';
+    nextBtn.className='btn btn-primary';
+    nextBtn.textContent = isLast ? 'Envoyer ma candidature / Submit' : 'Continuer / Continue';
+    if (!isLast) nextBtn.addEventListener('click', next);
+    var hint = document.createElement('span');
+    hint.className='hint-key'; hint.innerHTML = 'ou <kbd>Entrée ↵</kbd>';
+    nav.appendChild(backBtn); nav.appendChild(nextBtn);
+    if (!isLast) nav.appendChild(hint);
+  });
+
+  document.getElementById('startBtn').addEventListener('click', next);
+
+  form.addEventListener('keydown', function(e){
+    if (e.key === 'Enter' && e.target.tagName !== 'TEXTAREA'){
+      e.preventDefault();
+      if (steps[current].dataset.step === RECAP_STEP){ form.requestSubmit ? form.requestSubmit() : form.submit(); }
+      else next();
+    }
+  });
+
+  var courtArea = document.getElementById('synopsis_court');
+  courtArea.addEventListener('input', function(){
+    document.getElementById('courtCount').textContent = courtArea.value.length;
+  });
+
+  /* --- dynamic directors --- */
+  var addBtn = document.getElementById('addDirectorBtn');
+  var d2 = document.getElementById('director2');
+  var d3 = document.getElementById('director3');
+  function setRequired(block, isRequired){
+    ['prenom','nom','pays','email'].forEach(function(f){
+      var el = block.querySelector('[name$="_'+f+'"]');
+      if (el) { if (isRequired) el.setAttribute('required',''); else el.removeAttribute('required'); }
+    });
+  }
+  function clearBlock(block){
+    block.querySelectorAll('input').forEach(function(el){ el.value=''; });
+  }
+  addBtn.addEventListener('click', function(){
+    if (!d2.classList.contains('show')){
+      d2.classList.add('show'); setRequired(d2, true);
+      addBtn.textContent = '+ Ajouter encore un·e réalisateur·ice / Add one more director';
+    } else if (!d3.classList.contains('show')){
+      d3.classList.add('show'); setRequired(d3, true);
+      addBtn.classList.add('hide');
+    }
+  });
+  form.querySelectorAll('.director-remove').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var n = btn.getAttribute('data-remove');
+      var block = document.getElementById('director'+n);
+      clearBlock(block); setRequired(block, false); block.classList.remove('show');
+      addBtn.classList.remove('hide');
+      addBtn.textContent = (n === '2')
+        ? '+ Ajouter un·e autre réalisateur·ice / Add another director'
+        : '+ Ajouter encore un·e réalisateur·ice / Add one more director';
+    });
+  });
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    if (!validateStep(steps[current])) return;
+    var submitBtn = steps[current].querySelector('.btn-primary');
+    var errorBox = document.getElementById('submitError');
+    var defaultErrorText = errorBox.textContent;
+    errorBox.style.display = 'none';
+    if (submitBtn){ submitBtn.disabled = true; submitBtn.textContent = 'Envoi en cours… / Sending…'; }
+    var data = {};
+    new FormData(form).forEach(function(v,k){ data[k] = v; });
+
+    function timeout(ms){ return new Promise(function(r){ setTimeout(r, ms); }); }
+    var body = Object.keys(data).map(function(k){ return encodeURIComponent(k)+'='+encodeURIComponent(data[k]); }).join('&');
+
+    fetch('/', {
+      method:'POST',
+      headers:{'Content-Type':'application/x-www-form-urlencoded'},
+      body: body
+    }).then(function(res){
+      if (!res.ok) throw new Error('Erreur serveur (' + res.status + ')');
+      return res;
+    }).then(function(){
+      window.location.href = 'merci.html';
+    }).catch(function(err){
+      console.error("Échec de l'envoi du formulaire :", err);
+      errorBox.textContent = defaultErrorText + ' (' + (err && err.message ? err.message : 'erreur') + ')';
+      errorBox.style.display = 'block';
+      if (submitBtn){ submitBtn.disabled = false; submitBtn.textContent = 'Envoyer ma candidature / Submit'; }
+    });
+  });
+
+  function postResize(){
+    try{ window.parent.postMessage({ type:'sgfilmfest-resize', height: document.body.scrollHeight }, '*'); }catch(e){}
+  }
+  window.addEventListener('load', postResize);
+  window.addEventListener('resize', postResize);
+  updateRail();
+})();
+</script>
+</body>
+</html>

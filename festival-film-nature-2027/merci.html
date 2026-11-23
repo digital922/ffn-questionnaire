@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Merci — Candidature envoyée / Application submitted</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--paper:#FBFAF5;--ink:#12241F;--soft:#4B5A54;--gentian:#33489E;--gentian-dark:#232F6B;--line:#D8D4C4;--alpenglow:#DE9A55;}
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:'Work Sans',sans-serif;background:var(--paper);color:var(--ink);line-height:1.55;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:32px 22px;}
+  .card{max-width:620px;width:100%;}
+  .icon{width:60px;height:60px;border-radius:50%;background:var(--gentian);display:flex;align-items:center;justify-content:center;margin-bottom:1.2em;animation:pop .5s cubic-bezier(.2,.9,.3,1.4);}
+  @keyframes pop{from{transform:scale(.5);opacity:0;}to{transform:scale(1);opacity:1;}}
+  .rise{opacity:0;animation:rise .6s cubic-bezier(.2,.8,.2,1) forwards;}
+  .r1{animation-delay:.15s}.r2{animation-delay:.28s}.r3{animation-delay:.4s}.r4{animation-delay:.52s}
+  @keyframes rise{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+  @media (prefers-reduced-motion:reduce){.icon,.rise{animation:none;opacity:1;}}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;color:var(--gentian-dark);font-size:.86rem;margin-bottom:.8em;}
+  .dot{width:6px;height:6px;border-radius:50%;background:var(--alpenglow);}
+  h1{font-family:'Fraunces',serif;font-weight:500;font-size:clamp(1.8rem,4.5vw,2.7rem);line-height:1.12;margin:0 0 .2em;letter-spacing:-.01em;}
+  .en-title{font-family:'Fraunces',serif;font-style:italic;color:var(--soft);font-size:1.15rem;margin:0 0 1.4em;}
+  p{margin:0 0 .8em;}
+  .en{color:var(--soft);font-style:italic;}
+  .next{border:1px solid var(--line);border-radius:10px;padding:1em 1.2em;margin:1.6em 0;background:#fff;}
+  .next strong{font-family:'Fraunces',serif;font-weight:500;}
+  .actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:1.6em;}
+  .btn{display:inline-block;padding:.8em 1.5em;border-radius:6px;font-weight:600;text-decoration:none;font-size:.98rem;}
+  .btn-primary{background:var(--gentian);color:#fff;}.btn-primary:hover{background:var(--gentian-dark);}
+  .btn-ghost{border:1.5px solid var(--line);color:var(--ink);}.btn-ghost:hover{border-color:var(--gentian);}
+</style>
+</head>
+<body>
+<main class="card">
+  <div class="icon" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M4 12.5l5 5L20 7" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+  <div class="eyebrow rise r1"><span class="dot"></span>Festival du film nature · Saint-Gervais Mont-Blanc · 2027</div>
+  <h1 class="rise r1">Merci, votre candidature est bien envoyée</h1>
+  <p class="en-title rise r2">Thank you, your application has been submitted</p>
+  <p class="rise r2">Votre candidature a bien été soumise pour la 2ème édition du Festival du film nature. Merci pour votre confiance ! Aucun email de confirmation ne vous sera envoyé : cette page vaut confirmation de dépôt.</p>
+  <p class="en rise r2">Your application has been successfully submitted for the 2nd edition of the Nature Film Festival. Thank you! No confirmation email will be sent: this page serves as confirmation of your submission.</p>
+  <div class="next rise r3">
+    <p><strong>Et maintenant ?</strong> Le comité de sélection visionnera votre film et vous informera individuellement de sa décision. Les inscriptions sont ouvertes jusqu'au 10 janvier 2027 à minuit.</p>
+    <p class="en" style="margin:0;"><strong>What happens next?</strong> The selection committee will watch your film and inform you individually of its decision. Entries are open until 10 January 2027, midnight.</p>
+  </div>
+  <div class="actions rise r4">
+    <a class="btn btn-primary" href="index.html">Inscrire un autre film / Submit another film</a>
+    <a class="btn btn-ghost" href="reglement/reglement-fr.pdf" target="_blank" rel="noopener">Règlement FR</a>
+    <a class="btn btn-ghost" href="reglement/reglement-en.pdf" target="_blank" rel="noopener">Regulations EN</a>
+  </div>
+</main>
+<script>
+  try{ window.parent.postMessage({ type:'sgfilmfest-resize', height: document.body.scrollHeight }, '*'); }catch(e){}
+</script>
+</body>
+</html>
