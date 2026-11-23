@@ -478,8 +478,8 @@
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 12.5l5 5L20 7" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </div>
       <h2 class="step-title">Candidature envoyée<span class="en">Application submitted</span></h2>
-      <p class="step-help">Merci ! Votre film est bien enregistré pour l'édition 2027 du Festival du Film Nature de Saint-Gervais Mont-Blanc. Un email de confirmation vient de vous être envoyé.
-        <span class="sep">/</span> Thank you! Your film has been registered for the 2027 edition of the Saint-Gervais Mont-Blanc Nature Film Festival. A confirmation email has just been sent to you.</p>
+      <p class="step-help">Merci ! Votre candidature a bien été soumise pour l'édition 2027 du Festival du Film Nature de Saint-Gervais Mont-Blanc. Aucun email de confirmation ne sera envoyé.
+        <span class="sep">/</span> Thank you! Your application has been successfully submitted for the 2027 edition of the Saint-Gervais Mont-Blanc Nature Film Festival. No confirmation email will be sent.</p>
     </div>
   </section>
 
@@ -670,11 +670,7 @@
       body: body
     }).then(function(res){
       if (!res.ok) throw new Error('Erreur serveur (' + res.status + ')');
-      /* emails (optionnel, ne bloque jamais la confirmation) */
-      var mail = fetch('/.netlify/functions/notify', {
-        method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(data)
-      }).catch(function(){});
-      return Promise.race([mail, timeout(2500)]);
+      return res;
     }).then(function(){
       window.location.href = 'merci.html';
     }).catch(function(err){

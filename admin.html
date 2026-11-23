@@ -73,7 +73,7 @@
   <div class="gate-card">
     <h1>Espace organisation</h1>
     <p>Entrez le code d'accès pour consulter les candidatures reçues.</p>
-    <input id="pinInput" type="password" inputmode="numeric" maxlength="4" placeholder="••••" autofocus>
+    <input id="pinInput" type="password" inputmode="numeric" placeholder="••••" autofocus>
     <button class="gate-btn" id="pinSubmit">Accéder</button>
     <div class="gate-error" id="pinError"></div>
   </div>
@@ -123,6 +123,7 @@
       .then(function(res){
         if (res.status === 401){ throw new Error('pin'); }
         return res.json().catch(function(){ return {}; }).then(function(body){
+          if (res.status === 404){ throw new Error("la fonction « submissions » est introuvable sur Netlify. Vérifiez que le dossier netlify/functions (avec submissions.js) est bien dans le dépôt et visible dans l'onglet Functions de Netlify, puis redéployez."); }
           if (!res.ok){ throw new Error(body.error || ('Erreur serveur (' + res.status + ')')); }
           return body;
         });
